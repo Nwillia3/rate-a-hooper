@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase';
 
-const Login = () => {
+const Login = (props) => {
 	const [ formData, setFormData ] = useState({
 		email: '',
 		password: '',
@@ -20,7 +21,17 @@ const Login = () => {
 
 		if (email === '') {
 			setFormData({ ...formData, error: 'Please enter a valid email' });
+			return;
 		}
+
+		firebase.auth().signInWithEmailAndPassword(email, password).then(
+			() => {
+				props.history.push('/dashboard');
+			},
+			(error) => {
+				console.log(error);
+			}
+		);
 	};
 
 	return (
@@ -48,7 +59,7 @@ const Login = () => {
 						value={password}
 					/>
 				</div>
-				
+
 				<div className="flex items-center justify-between">
 					<button
 						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
