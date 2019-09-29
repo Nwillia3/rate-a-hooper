@@ -7,6 +7,9 @@ import Login from './components/login';
 import Signup from './components/signup';
 import Dashboard from './components/dashboard';
 import Navbar from './components/navbar';
+import Edit from './components/Profile/Edit';
+import Display from './components/Profile/Display';
+
 // import useAuthHook from './hooks/authHook';
 // import { useProfile } from './hooks/authHook';
 
@@ -15,20 +18,22 @@ function App() {
 		const provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithPopup(provider);
 	};
+	// <div>
+	// 			<button className="" onClick={() => google()}>
+	// 				google login
+	// 			</button>
+	// 		</div>
 
 	return (
-		<div>
+		<div className="w-full">
 			<Router>
 				<Navbar />
 				<Route exact path="/signup" component={Signup} />
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/login" component={Login} />
+				<Route exact path="/profile" component={Display} />
+				<Route exact path="/editprofile" component={Edit} />
 			</Router>
-			<div>
-				<button className="" onClick={() => google()}>
-					google login
-				</button>
-			</div>
 		</div>
 	);
 }

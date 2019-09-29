@@ -2,16 +2,11 @@ import { useState } from 'react';
 import firebase from 'firebase';
 
 export function useAuthHook() {
-	// const [ state, setState ] = useState({
-	// 	loggedIn: false,
-	// 	users: null
-	// });
-
 	const [ state, setState ] = useState(false);
 	const [ user, setUser ] = useState(null);
 
 	firebase.auth().onAuthStateChanged((user) => {
-		console.log(user);
+		// console.log(user);
 		// user ? setState({ loggedIn: true, users: user }) : setState({ ...state });
 		user ? setState(true) : setState(false);
 		if (user) setUser(user);

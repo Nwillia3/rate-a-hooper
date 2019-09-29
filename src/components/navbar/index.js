@@ -1,3 +1,13 @@
+/*
+
+task
+create data model for user and profile
+
+
+
+
+*/
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase';
@@ -8,8 +18,8 @@ const Navbar = () => {
 		isOpen: false
 	});
 
-	const isLoggedIn = useAuthHook();
-	console.log(isLoggedIn);
+	const { state: isLoggedIn, user: users } = useAuthHook();
+	// console.log(users);
 
 	const { isOpen } = toggle;
 
@@ -21,6 +31,17 @@ const Navbar = () => {
 		e.preventDefault();
 		firebase.auth().signOut();
 	};
+
+	firebase.firestore().collection('user_stats').doc('yrSHghU6PMYcuRAIehNu').get().then((doc) => {
+		if (doc.exists) {
+			// console.log('Document data:', doc.data());
+			let dt = doc.data();
+			// console.log(dt);
+		} else {
+			// doc.data() will be undefined in this case
+			console.log('No such document!');
+		}
+	});
 
 	const displayNav = isOpen ? 'block ' : 'hidden';
 	return (
