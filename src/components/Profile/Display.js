@@ -1,19 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthHook } from '../../hooks/authHook';
+import { reviews } from '../../FakeData/data';
 
 function Display() {
-	const [ userData, setUserData ] = useState();
+	const [ userReviews, setUserReviews ] = useState(null);
+	const [ avg, setAvg ] = useState(null);
 
-	// const data = useAuthHook();
+	useEffect(() => {
+		const data = reviews();
+		setUserReviews(data);
+	}, []);
 
-	// useEffect(() => {
-	// 	// setUserData({ ...userData, data });
-	// }, []);
+	let user = {
+		h: 0,
+		r: 0,
+		s: 0,
+		d: 0,
+		p: 0,
+		de: 0
+	};
+
+	if (userReviews)
+		userReviews.forEach((x) => {
+			console.log(x.Handling);
+			user.h += x.Handling;
+			user.r += x.Rebounding;
+			user.s += x.Shooting;
+			user.d += x.Dunking;
+			user.p += x.Passing;
+			user.de += x.Defense;
+		});
+
+	for (let i in users) {
+	}
 
 	return (
-		<div className="h-screen w-full">
-			<section className="">
+		<div className="">
+			<section className="py-4">
 				<div className="flex flex-row justify-around">
 					<div>
 						<h1 className="text-4xl">NW</h1>
@@ -30,49 +54,121 @@ function Display() {
 						</Link>
 					</div>
 				</div>
-				<div className="px-3 py-4">
-					<ul class="flex">
-						<li class="mr-6">Height</li>
-						<li class="mr-6">Weight</li>
-						<li class="mr-6">Dominate Hand</li>
-					</ul>
+				<div className="flex flex-row pl-12 py-4 ">
+					<div className="px-3 py-4">
+						<span className="font-bold">180</span>
+						<h4>Weight</h4>
+					</div>
+					<div className="px-3 py-4">
+						<span className="font-bold">6'3"</span>
+						<h4>Height</h4>
+					</div>
+					<div className="px-3 py-4">
+						<span className="font-bold">Left</span>
+						<h4>Dominate Hand</h4>
+					</div>
 				</div>
 			</section>
-			<section className="mt-4 pt-4 flex flex-row justify-around">
-				<h1 className="text-2xl">
-					97% <br />
-					<span>Handling</span>
-				</h1>
-				<h1> Best Skill by peers, averaged together</h1>
+			<h1 className="max-w-sm m-auto text-lg font-semibold py-2">Latest: Overall Peer Rating</h1>
+
+			<section className="max-w-sm m-auto py-4 flex flex-col rounded overflow-hidden shadow-lg">
+				<div className="flex flex-row justify-around py-4">
+					<div className="flex flex-row">
+						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+						<div className="pl-2">
+							<h2>Dunking</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+
+					<div className="flex flex-row">
+						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+
+						<div className="pl-2">
+							<h2>Dunking</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+				</div>
+				<div className="flex flex-row justify-around py-4">
+					<div className="flex flex-row">
+						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+						<div className="pl-2">
+							<h2>Dunking</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+
+					<div className="flex flex-row">
+						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+
+						<div className="pl-2">
+							<h2>Dunking</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+				</div>
+				<div className="flex flex-row justify-around py-4">
+					<div className="flex flex-row">
+						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+						<div className="pl-2">
+							<h2>Dunking</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+
+					<div className="flex flex-row">
+						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+
+						<div className="pl-2">
+							<h2>Dunking</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+				</div>
 			</section>
-			<section className="mt-3 pt-6">
-				<h1 className="text-center">Review section</h1>
-				<table>
-					<thead>
-						<tr className="pl-2">Reviewer name:1</tr>
-					</thead>
-					<tbody>
-						<tbody>
-							<tr className="">
-								<td className="pl-2"> Handling</td>
-								<td className="pl-2">99%</td>
-								<td className="pl-2">Dunking</td>
-								<td className="pl-2">30%</td>
-								<td className="pl-2"> Defense</td>
-								<td className="pl-2">99%</td>
-							</tr>
-							<tr>
-								<td className="pl-2">Rebound</td>
-								<td className="pl-2">30%</td>
-								<td className="pl-2"> Passing</td>
-								<td className="pl-2">99%</td>
-								<td className="pl-2">Shooting</td>
-								<td className="pl-2">30%</td>
-							</tr>
-						</tbody>
-					</tbody>
-				</table>
-			</section>
+
+			<h1 className=" max-w-sm m-auto text-xl text-center font-semibold mt-4 py-4">Review Section</h1>
+
+			{userReviews &&
+				userReviews.map((item) => (
+					<section className="m-auto px-6 py-4" key={item.username}>
+						<div className="max-w-sm rounded overflow-hidden shadow-lg">
+							<div className="px-6 py-4">
+								<div className="font-bold text-xl mb-2 text-left">
+									{item.username} <span>said</span>
+								</div>
+								<div className="flex flex-row justify-around">
+									<div className="text-gray-700 text-lg">
+										<h1 className="">
+											Handling <span>{item.Handling}</span>
+										</h1>
+										<h1>
+											Defense <span>{item.Defense}</span>
+										</h1>
+										<h1>
+											Passing <span>{item.Passing}</span>
+										</h1>
+									</div>
+									<div className="text-gray-700 text-lg">
+										<h1>
+											Shooting <span>{item.Shooting}</span>
+										</h1>
+										<h1>
+											Rebound <span>{item.Rebounding}</span>
+										</h1>
+										<h1>
+											Dunking <span>{item.Dunking}</span>
+										</h1>
+									</div>
+								</div>
+							</div>
+							<div className="px-6 py-2 text-gray-700 text-base">
+								You played together at the <span className="font-semibold">40 park</span>
+							</div>
+						</div>
+					</section>
+				))}
 		</div>
 	);
 }
