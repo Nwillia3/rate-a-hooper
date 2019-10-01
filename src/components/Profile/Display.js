@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import drew from '../../img/uncledrew.png';
+
 import { Link } from 'react-router-dom';
-import { useAuthHook } from '../../hooks/authHook';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faBasketballBall, faDumbbell, faEye, faLock, faMeteor } from '@fortawesome/free-solid-svg-icons';
+import { faHandPaper } from '@fortawesome/free-solid-svg-icons';
+
+// import { useAuthHook } from '../../hooks/authHook';
 import { reviews } from '../../FakeData/data';
 
 function Display() {
 	const [ userReviews, setUserReviews ] = useState(null);
-	const [ avg, setAvg ] = useState(null);
+	// const [ avg, setAvg ] = useState(null);
 
 	useEffect(() => {
 		const data = reviews();
@@ -23,7 +30,6 @@ function Display() {
 
 	if (userReviews)
 		userReviews.forEach((x) => {
-			console.log(x.Handling);
 			user.h += x.Handling;
 			user.r += x.Rebounding;
 			user.s += x.Shooting;
@@ -32,15 +38,12 @@ function Display() {
 			user.de += x.Defense;
 		});
 
-	for (let i in users) {
-	}
-
 	return (
 		<div className="">
 			<section className="py-4">
 				<div className="flex flex-row justify-around">
 					<div>
-						<h1 className="text-4xl">NW</h1>
+						<img src={drew} className="w-1/2 m-auto" alt="Uncle Drew" />
 					</div>
 					<div>
 						<h3 className="pt-2">Uncle Drew</h3>
@@ -48,7 +51,7 @@ function Display() {
 						<h5 className="pt-2 pb-4">Slasher</h5>
 						<Link
 							to="/editprofile"
-							className="p-2 rounded text-white bg-gray-800 hover:bg-gray-500 hover:text-black"
+							className="p-2 rounded text-white 	bg-gray-800 hover:bg-gray-500 hover:text-black"
 						>
 							Edit Profile
 						</Link>
@@ -74,7 +77,9 @@ function Display() {
 			<section className="max-w-sm m-auto py-4 flex flex-col rounded overflow-hidden shadow-lg">
 				<div className="flex flex-row justify-around py-4">
 					<div className="flex flex-row">
-						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+						<span className="pt-2">
+							<FontAwesomeIcon size="2x" icon={faBasketballBall} />
+						</span>
 						<div className="pl-2">
 							<h2>Dunking</h2>
 							<h2>2.0</h2>
@@ -82,46 +87,57 @@ function Display() {
 					</div>
 
 					<div className="flex flex-row">
-						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+						<span className="pt-2">
+							<FontAwesomeIcon size="2x" icon={faHandPaper} />
+						</span>
 
 						<div className="pl-2">
-							<h2>Dunking</h2>
-							<h2>2.0</h2>
-						</div>
-					</div>
-				</div>
-				<div className="flex flex-row justify-around py-4">
-					<div className="flex flex-row">
-						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
-						<div className="pl-2">
-							<h2>Dunking</h2>
-							<h2>2.0</h2>
-						</div>
-					</div>
-
-					<div className="flex flex-row">
-						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
-
-						<div className="pl-2">
-							<h2>Dunking</h2>
+							<h2>Handles</h2>
 							<h2>2.0</h2>
 						</div>
 					</div>
 				</div>
 				<div className="flex flex-row justify-around py-4">
 					<div className="flex flex-row">
-						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+						<span className="pt-2">
+							<FontAwesomeIcon size="2x" icon={faDumbbell} />
+						</span>
 						<div className="pl-2">
-							<h2>Dunking</h2>
+							<h2>Rebound</h2>
 							<h2>2.0</h2>
 						</div>
 					</div>
 
 					<div className="flex flex-row">
-						<h1 className="text-lg text-center pt-4 rounded-full h-16 w-16 bg-gray-300">icon</h1>
+						<span className="pt-2">
+							<FontAwesomeIcon size="2x" icon={faEye} />
+						</span>
 
 						<div className="pl-2">
-							<h2>Dunking</h2>
+							<h2>Passing</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+				</div>
+				<div className="flex flex-row justify-around py-4">
+					<div className="flex flex-row">
+						<span className="pt-2">
+							<FontAwesomeIcon size="2x" icon={faLock} />
+						</span>
+
+						<div className="pl-2">
+							<h2>Defense</h2>
+							<h2>2.0</h2>
+						</div>
+					</div>
+
+					<div className="flex flex-row">
+						<span className="pt-2">
+							<FontAwesomeIcon size="2x" icon={faMeteor} />
+						</span>
+
+						<div className="pl-2">
+							<h2>Shooting</h2>
 							<h2>2.0</h2>
 						</div>
 					</div>

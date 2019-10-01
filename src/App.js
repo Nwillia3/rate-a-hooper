@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import './tailwind.css';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import Login from './components/login';
 import Signup from './components/signup';
@@ -14,10 +14,10 @@ import Display from './components/Profile/Display';
 // import { useProfile } from './hooks/authHook';
 
 function App() {
-	const google = () => {
-		const provider = new firebase.auth.GoogleAuthProvider();
-		firebase.auth().signInWithPopup(provider);
-	};
+	// const google = () => {
+	// 	const provider = new firebase.auth.GoogleAuthProvider();
+	// 	firebase.auth().signInWithPopup(provider);
+	// };
 	// <div>
 	// 			<button className="" onClick={() => google()}>
 	// 				google login

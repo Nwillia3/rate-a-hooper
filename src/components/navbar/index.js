@@ -19,7 +19,6 @@ const Navbar = () => {
 	});
 
 	const { state: isLoggedIn, user: users } = useAuthHook();
-	// console.log(users);
 
 	const { isOpen } = toggle;
 
@@ -30,16 +29,15 @@ const Navbar = () => {
 	const handleLogOut = (e) => {
 		e.preventDefault();
 		firebase.auth().signOut();
+		console.log(isLoggedIn);
 	};
 
 	firebase.firestore().collection('user_stats').doc('yrSHghU6PMYcuRAIehNu').get().then((doc) => {
 		if (doc.exists) {
-			// console.log('Document data:', doc.data());
-			let dt = doc.data();
-			// console.log(dt);
+			// let dt = doc.data();
 		} else {
-			// doc.data() will be undefined in this case
 			console.log('No such document!');
+			console.log(users);
 		}
 	});
 
@@ -73,16 +71,43 @@ const Navbar = () => {
 				</div>
 			</div>
 			<div className={`${displayNav} px-2 py-2 sm:flex`}>
-				<Link to="/" className="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-gray-600">
-					Home
-				</Link>
-				<Link
-					to="/dashboard"
-					className="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-gray-600"
-				>
-					Dashboard
-				</Link>
-				{isLoggedIn && <button onClick={(e) => handleLogOut(e)}>Login out</button>}
+				{!isLoggedIn ? (
+					<div>
+						<Link
+							to="/signup"
+							className="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-gray-600"
+						>
+							Sign up
+						</Link>
+						<Link
+							to="/login"
+							className="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-gray-600"
+						>
+							Sign in
+						</Link>
+					</div>
+				) : (
+					<div>
+						<Link
+							to="/dashboard"
+							className="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-gray-600"
+						>
+							Dashboard
+						</Link>
+						<Link
+							to="/profile"
+							className="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-gray-600"
+						>
+							View Profile
+						</Link>
+						<button
+							className="block mt-1 px-2 py-1 text-white font-semibold rounded hover:bg-gray-600"
+							onClick={handleLogOut}
+						>
+							Login out
+						</button>
+					</div>
+				)}
 			</div>
 		</header>
 	);
